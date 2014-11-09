@@ -8,14 +8,18 @@ body {
     overflow: hidden;
 }
 
-.container{
+.mainGame{
     height: 100vh;
     width: 100vw;
 }
 
+.btnStart{
+    height: 10vh;
+    width: 100vw;
+    font-size: 30px;
+}
+
 #divDrag{
-    height: 50px;
-    width: 50px;
     background: #FF4444;
 }
 
