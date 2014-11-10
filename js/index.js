@@ -1,5 +1,8 @@
 $(document).ready(function(){
-    gameInit();
+    $('.splash').hide();
+    $('.mainMenu').show();
+    $('.mainGame').hide();
+    $('.retry').hide();
 });
 
 var devHeight = parseInt(window.innerHeight),
@@ -25,7 +28,10 @@ var veg = function(vegId,vegLevel){
     var moveVeg = function(){
         vegPosY = vegPosY - vegSpeed;
         if(vegPosY < 0){
-            stopVeg();
+            vegPosY = devHeight - vegHeight;
+            vegPosX = Math.random()*devWidth + vegWidth;
+            $("#veg"+vegId)
+            .css("transform" , "translate(0px," + vegPosY + "px)");
         }
         $("#veg"+vegId).css("left" , vegPosX + 'px');
         $("#veg"+vegId)
@@ -35,16 +41,16 @@ var veg = function(vegId,vegLevel){
             .css("transform" , "translate(0px," + vegPosY + "px)");
     };
     var collideCheck = function(){
-        if(vegPosX > singerPosX - vegWidth && vegPosX < singerPosX + singerWidth)
+        if(vegPosX>singerPosX-vegWidth && vegPosX<singerPosX+singerWidth && vegPosY<singerPosY && vegPosY>singerPosY-singerHeight)
         {
-            if(vegPosY < singerPosY && vegPosY > singerPosY - singerHeight)
-            {
-                gameOver();
-            }
+            clearInterval(moveThatAss);
+            gameOver();
         }
     };
     var stopVeg = function(){
-        clearInterval(moveThatAss);   
+        clearInterval(moveThatAss); 
+        //$("#veg"+vegId).remove();
+        //newVeg = new veg(0,1);
     };
     var levelUp = function(){
         vegLevel = vegLevel + 1;
@@ -58,27 +64,27 @@ var veg = function(vegId,vegLevel){
 };
 
 var vegCreate = function(){
-    $(".mainGame")
-        .append("<div class='veg' id='veg'"+ vegCount +">VEG "+ vegCount + "</div>");
-    
-    newVeg = new veg(0,1);
-    newVeg = new veg(1,1);
-    newVeg = new veg(2,1);
-    newVeg = new veg(3,1);
-    newVeg = new veg(4,1);
-    newVeg = new veg(5,1);
-    newVeg = new veg(6,1);
-    newVeg = new veg(7,1);
-    newVeg = new veg(8,1);
-    newVeg = new veg(9,1);
+    // $(".mainGame")
+        // .append("<div class='veg' id='veg'"+ vegCount +">VEG "+ vegCount + "</div>");
+    // var vegDiv = document.createElement(div);
+    // vegDiv.className = 'veg';
+    // vegDiv.id = 'veg'+vegCount;
+    // $('.mainGame').appendChild(vegDiv);
+    new veg(vegCount,1);
+    vegCount++;
 };
 
 var gameInit = function(){
-    $('#divDrag')
+    $('.mainMenu').hide();
+    $('.mainGame').show();
+    //$('.veg').remove();
+
+    $('#singer')
         .css("width" , singerWidth + 'px')
         .css("height" , singerHeight + 'px');
 
-    vegCreate();
+    for(i=0;i<10;i++)
+       vegCreate();
 
     // window.setInterval(function(){
     //     levelUp();
@@ -86,8 +92,24 @@ var gameInit = function(){
 },
 
     gameOver = function(){
-        alert("Game Over, Bitch");
+        console.log("Game Over");
+        $('.mainGame').hide();
+        $('.retry')
+            .show();
+            
+        $('.endDetails').html("Your Score: " + theTime);
+        clearInterval(timer);
+        // alert("Game Over, Bitch");
     };
+
+var theTime=0;
+
+var theTimekeeper = function()
+{
+    theTime++;
+}
+
+var timer = setInterval(theTimekeeper,1000);
 
 var app = {
     // Application Constructor
@@ -126,7 +148,7 @@ app.initialize();
 interact('.draggable')
     .draggable({
         onmove: function (event) {
-            var target = event.target,
+            var target = event.target;
                 x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
                 y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
