@@ -31,7 +31,7 @@ var veg = function(vegId,vegLevel){
             vegPosY = devHeight - vegHeight;
             vegPosX = Math.random()*devWidth + vegWidth;
             $("#veg"+vegId)
-            .css("transform" , "translate(0px," + vegPosY + "px)");
+                .css("transform" , "translate(0px," + vegPosY + "px)");
         }
         $("#veg"+vegId).css("left" , vegPosX + 'px');
         $("#veg"+vegId)
