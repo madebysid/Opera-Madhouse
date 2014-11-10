@@ -5,20 +5,20 @@ A simple JavaScript Game made for Cordova
 
 
 Changelog:
-> Added basic maain menu
-> Fully randomized obstacles
-> Added basic scoring based on time
+1. Added basic maain menu.
+2. Fully randomized obstacles
+3. Added basic scoring based on time
 
 Bugs:
-> If you stay on the top left, you will never lose
-> Collision still erratic. Problem in collisionCheck() function conditions, most probably
-> Obstacles going back down are visible. Should disappear, then reappear on the bottom
+1. If you stay on the top left, you will never lose
+2. Collision still erratic. Problem in collisionCheck() function conditions, most probably
+3. Obstacles going back down are visible. Should disappear, then reappear on the bottom
 
 To Do:
-> Splash Screen
-> Maintain a local high score (JavaScript cookies! Yum!)
-> Build leaderboard
-> Graphics
+1. Splash Screen
+2. Maintain a local high score (JavaScript cookies! Yum!)
+3. Build leaderboard
+4. Graphics
 
 Comments:
-Ugly as fuck. I myself don't want to play this right now. -_-
+Ugly as fuck. The developer doesn't want to play this right now. -_-
